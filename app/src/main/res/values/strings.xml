@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Easy Learning</string>
+    <string name="game_title_label">Game title</string>
+    <string name="game_description_label">Breve descripcion del juego</string>
+    <string name="difficulty_game_label">Dificultad</string>
+    <string name="icon_game_label">Icono del juego</string>
+    <string name="game_instructions_label">Aqui deben colocarse las instrucciones del juego</string>
+    <string name="next_button">SIGUIENTE</string>
+    <string name="previous_button">ANTERIOR</string>
+
+    <string-array name="listen_imitate_titles">
+        <item>Sonrisa grande</item>
+        <item>Cara brava</item>
+        <item>Rie a carcajadas</item>
+        <item>Cara triste</item>
+        <item>Bosteza</item>
+    </string-array>
+
+    <string-array name="animal_sounds_names">
+        <item>Perro</item>
+        <item>León</item>
+        <item>Gato</item>
+        <item>Pájaro</item>
+        <item>Lobo</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="erase_canvas">BORRAR</string>
+    <string name="cd_play_an_animal_sound">Play an animal sound</string>
+    <string name="cd_shows_an_animal_picture">Shows an animal picture</string>
+</resources>
