@@ -34,6 +34,7 @@ public class AnimalSoundsFragment extends Fragment {
 
         soundsAdapter = new SoundsAdapter(null);
         soundsGrid.setAdapter(soundsAdapter);
+        soundsGrid.setHasFixedSize(true);
 
         animalsAdapter = new AnimalsAdapter(null);
         animalsGrid.setAdapter(animalsAdapter);
@@ -57,5 +58,11 @@ public class AnimalSoundsFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(AnimalSoundsViewModel.class);
         mViewModel.getSounds().observe(this, sounds -> soundsAdapter.setSounds(sounds, getContext()));
         mViewModel.getAnimals().observe(this, animals -> animalsAdapter.setDataSet(animals));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        soundsAdapter.stopMediaPlayerResources();
     }
 }

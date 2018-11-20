@@ -12,7 +12,7 @@
     <style name="TextView"></style>
 
     <style name="TextView.Instructions">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorText</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_marginEnd">15dp</item>
         <item name="android:layout_marginStart">15dp</item>
@@ -27,7 +27,7 @@
     </style>
 
     <style name="TextView.Description">
-        <item name="android:textColor">@color/colorDescriptions</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_margin">7dp</item>
     </style>

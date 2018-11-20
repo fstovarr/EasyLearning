@@ -37,7 +37,7 @@ public class AnimalSoundsViewModel extends AndroidViewModel {
             for (int i = 0; i < animals.length; i++) {
                 animals[i] = new AnimalSound();
                 animals[i].setTitle(names[i]);
-                animals[i].setImageId(R.drawable.ic_play_description_voice);
+                animals[i].setImageId(R.drawable.whoanimal);
                 animals[i].setResourceId(ids[i]);
             }
 

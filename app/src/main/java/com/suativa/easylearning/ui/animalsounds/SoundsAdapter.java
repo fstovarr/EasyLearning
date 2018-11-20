@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder> {
@@ -30,10 +31,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
         listeners = new ArrayList<>();
 
         addOnItemClickListener((parent, view, position, id) -> {
-            if (lastPosition != -1) {
-                mediaPlayers[lastPosition].pause();
-                mediaPlayers[lastPosition].seekTo(0);
-            }
+            stopMediaPlayerResources();
             mediaPlayers[position].start();
             lastPosition = position;
         });
@@ -65,10 +63,17 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
         }
     }
 
+    public void stopMediaPlayerResources() {
+        if (lastPosition != -1) {
+            mediaPlayers[lastPosition].pause();
+            mediaPlayers[lastPosition].seekTo(0);
+        }
+    }
+
     private void freeMediaPlayerResources() {
         if (mediaPlayers == null) return;
 
-        mediaPlayers[lastPosition].stop();
+        stopMediaPlayerResources();
 
         for (int i = 0; i < mediaPlayers.length; i++) {
             mediaPlayers[i].release();
@@ -85,12 +90,13 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
                 .inflate(R.layout.item_sounds, parent, false);
         if (context == null)
             context = parent.getContext();
-        return new ViewHolder((ImageButton) inflater);
+        return new ViewHolder((CardView) inflater);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.greenballoon));
+        holder.imageView.setImageDrawable(context.getResources().getDrawable(
+                sounds[position].getImageId()));
     }
 
     @Override
@@ -105,11 +111,11 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageButton imageView;
 
-        public ViewHolder(ImageButton imageView) {
+        public ViewHolder(CardView imageView) {
             super(imageView);
-            this.imageView = imageView;
-            imageView.setOnClickListener(v -> notifyItemClicked(
-                    null, imageView, getAdapterPosition()));
+            this.imageView = imageView.findViewById(R.id.sound_image);
+            this.imageView.setOnClickListener(v -> notifyItemClicked(
+                    null, this.imageView, getAdapterPosition()));
         }
     }
 }

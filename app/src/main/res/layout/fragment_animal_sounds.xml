@@ -6,23 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.animalsounds.AnimalSoundsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/grid_sounds"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/grid_animals"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
-        android:id="@+id/grid_animals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:item_layout="@layout/item_animals"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorAccentLight"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/grid_sounds"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/grid_sounds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp" />
+
+        <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+            android:id="@+id/grid_animals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            app:item_layout="@layout/item_animals" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

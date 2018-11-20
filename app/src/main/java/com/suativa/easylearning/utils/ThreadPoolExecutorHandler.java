@@ -1,9 +1,8 @@
 package com.suativa.easylearning.utils;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolExecutorHandler {
@@ -12,16 +11,12 @@ public class ThreadPoolExecutorHandler {
     private static ThreadPoolExecutorHandler handler;
     private static int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
     private final BlockingQueue<Runnable> mDecodeWorkQueue;
-    private Executor executor;
+    private ScheduledThreadPoolExecutor executor;
 
     private ThreadPoolExecutorHandler() {
         mDecodeWorkQueue = new LinkedBlockingQueue<>();
-        executor = new ThreadPoolExecutor(
-                NUMBER_OF_CORES,
-                NUMBER_OF_CORES,
-                KEEP_ALIVE_TIME,
-                KEEP_ALIVE_TIME_UNIT,
-                mDecodeWorkQueue
+        executor = new ScheduledThreadPoolExecutor(
+                NUMBER_OF_CORES
         );
     }
 
@@ -33,8 +28,12 @@ public class ThreadPoolExecutorHandler {
     }
 
     public void addThread(Runnable runnable) {
+        addThread(runnable, 0);
+    }
+
+    public void addThread(Runnable runnable, long delay) {
         synchronized (executor) {
-            executor.execute(runnable);
+            executor.schedule(runnable, delay, TimeUnit.MILLISECONDS);
         }
     }
 }

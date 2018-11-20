@@ -6,6 +6,7 @@ public class Game {
     private String id;
     private int difficulty;
     private int image;
+    private int instrucionsId;
 
     public String getTitle() {
         return title;
@@ -45,5 +46,13 @@ public class Game {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public int getInstrucionsId() {
+        return instrucionsId;
+    }
+
+    public void setInstrucionsId(int instrucionsId) {
+        this.instrucionsId = instrucionsId;
     }
 }

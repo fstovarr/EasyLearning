@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,9 @@ import com.byox.drawview.enums.BackgroundType;
 import com.byox.drawview.views.DrawView;
 import com.suativa.easylearning.R;
 import com.suativa.easylearning.utils.ImageHandler;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class DrawVowelsFragment extends Fragment {
     public DrawVowelsFragment() {
@@ -52,12 +53,11 @@ public class DrawVowelsFragment extends Fragment {
         return view;
     }
 
-
     private void loadBackground(DrawView drawView) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.vowels_to_draw);
         Point sizeScreen = new Point();
         getActivity().getWindowManager().getDefaultDisplay().getSize(sizeScreen);
-        Bitmap matrix = ImageHandler.getScaledDrawable(bitmap, sizeScreen.x);
+        Bitmap matrix = ImageHandler.getScaledDrawable(bitmap, sizeScreen.x, sizeScreen.y, ImageHandler.WIDTH_MATCH_PARENT, 5);
 
         drawView.post(() -> drawView.setBackgroundImage(matrix, BackgroundType.BITMAP, BackgroundScale.FIT_XY));
 

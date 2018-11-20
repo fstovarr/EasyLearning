@@ -1,24 +1,28 @@
 package com.suativa.easylearning;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
+import android.widget.ImageButton;
 
 import com.suativa.easylearning.ui.GamesViewModel;
 import com.suativa.easylearning.ui.main.ScrollGamesAdapter;
 
 import java.util.Objects;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScrollGamesAdapter adapter;
     private GamesViewModel mViewModel;
     private RecyclerView.LayoutManager layoutManager;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +51,23 @@ public class MainActivity extends AppCompatActivity {
 
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+        mp = MediaPlayer.create(this, R.raw.main_instructions);
+
+        ImageButton crab = findViewById(R.id.crab_button);
+        crab.setOnClickListener(v -> mp.start());
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStop() {
+        super.onStop();
+        stopMediaPlayer();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    private void stopMediaPlayer() {
+        if (mp != null) {
+            mp.pause();
+            mp.seekTo(0);
+        }
     }
 }

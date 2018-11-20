@@ -19,20 +19,20 @@ public class ListenAndImitateViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public int getCurrentItemPosition() {
+    int getCurrentItemPosition() {
         return currentItemPosition;
     }
 
-    public void incrementPosition() {
+    void incrementPosition() {
         this.currentItemPosition += 1;
     }
 
-    public void decrementPosition() {
+    void decrementPosition() {
         if (currentItemPosition - 1 >= 0)
             this.currentItemPosition -= 1;
     }
 
-    public MutableLiveData<ListenImitateItem[]> getItems() {
+    MutableLiveData<ListenImitateItem[]> getItems() {
         if (items == null)
             items = new MutableLiveData<>();
 
@@ -43,8 +43,8 @@ public class ListenAndImitateViewModel extends AndroidViewModel {
                 R.array.listen_imitate_titles);
         ListenImitateItem[] imitateItems = new ListenImitateItem[titles.length];
 
-        Integer images[] = {R.drawable.smile, R.drawable.angry, R.drawable.dog, R.drawable.lion,
-                R.drawable.yawn};
+        Integer images[] = {R.drawable.smile, R.drawable.angry, R.drawable.laughter,
+                R.drawable.sad, R.drawable.disgust};
 
         for (int i = 0; i < imitateItems.length; i++) {
             if (imitateItems[i] == null) imitateItems[i] = new ListenImitateItem();
