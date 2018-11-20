@@ -17,9 +17,12 @@ import com.suativa.easylearning.utils.ImageHandler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class ProfessionsFragment extends Fragment {
+    private int counter;
+
     public static ProfessionsFragment newInstance() {
         return new ProfessionsFragment();
     }
@@ -29,6 +32,40 @@ public class ProfessionsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_draw_vowels, container, false);
         DrawView drawView = view.findViewById(R.id.draw_view);
+
+        int colors[] = {R.color.colorPrimary, R.color.colorSecondary, R.color.colorAccent,
+                R.color.colorPrimaryLight, R.color.colorSecondaryDark, R.color.colorAccentLight,
+                R.color.colorPrimaryDark, R.color.colorSecondaryLight};
+
+        counter = 0;
+        setColorDrawView(drawView, colors[counter]);
+
+        drawView.setOnDrawViewListener(new DrawView.OnDrawViewListener() {
+            @Override
+            public void onStartDrawing() {
+            }
+
+            @Override
+            public void onEndDrawing() {
+                ++counter;
+                counter %= colors.length;
+                setColorDrawView(drawView, colors[counter]);
+            }
+
+            @Override
+            public void onClearDrawing() {
+                counter = 0;
+                setColorDrawView(drawView, colors[counter]);
+            }
+
+            @Override
+            public void onRequestText() {
+            }
+
+            @Override
+            public void onAllMovesPainted() {
+            }
+        });
 
         loadBackground(drawView);
         view.requestLayout();
@@ -40,6 +77,10 @@ public class ProfessionsFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setColorDrawView(DrawView drawView, int resourceId) {
+        drawView.setDrawColor(ContextCompat.getColor(getContext(), resourceId));
     }
 
     private void loadBackground(DrawView drawView) {
